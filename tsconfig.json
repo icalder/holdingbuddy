@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "incremental": true,
+        "module": "ES6",
+        "esModuleInterop": true,
+        "target": "ES6",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        // "outFile": "./dist/bundle.js",
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "node_modules/*",
+                "modules/types/*"
+            ]
+        },
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["es2015", "dom"]
+    },
+    "include": [
+        "index.ts",
+        "modules/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

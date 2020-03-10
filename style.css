@@ -1,0 +1,85 @@
+:root {
+    --background-color: black;
+    --text-color: white;
+    --entry-path-color: white;
+    --test-color: rgb(6, 69, 206);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+/*form {
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+input {
+    margin-right: 1em;
+}
+
+.chart {
+    margin-left: 5%;
+    margin-right: 5%;
+    height: auto;
+}
+
+.chart .direct {
+    fill: #d5e0fe;
+    stroke: #aaa;
+    opacity: 50%;
+}
+
+.chart .teardrop {
+    fill: #656371;
+    stroke: #aaa;
+    opacity: 50%;
+}
+
+.chart .parallel {
+    fill: #ff7369;
+    stroke: #aaa;
+    opacity: 50%;
+}
+
+.segment-label {
+    fill: var(--text-color);
+}
+
+.racetrack-arrow {
+    fill: #f00;
+}
+
+#racetrack-group path {
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 2;
+}
+
+#entry-group text {
+    fill: var(--text-color);
+}
+
+.entry-arrow {
+    fill: var(--entry-path-color);
+}
+
+#entry-group path,line {
+    stroke: var(--entry-path-color);
+    stroke-width: 1;    
+    stroke-dasharray: 3 3;
+}
+
+@media screen and (max-width: 600px) {
+    input {
+      width: 100%;
+      margin-top: 0;
+    }
+}
+
+form div {
+    float: left;
+}

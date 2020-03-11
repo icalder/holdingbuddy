@@ -26,7 +26,7 @@ export class Chart {
     
     constructor (chartSelector: string,
         private width: number, private height: number) {
-            this.svg = SVG.SVG().size('100%', '100%').addTo(chartSelector);
+            this.svg = SVG.SVG().size('90%', '90%').addTo(chartSelector);
             this.svg.viewbox(0, 0, width, height);
             this.defs = new Defs(this.svg);
     }

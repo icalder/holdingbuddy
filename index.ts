@@ -50,4 +50,17 @@ window.onload = () => {
         chart.lefthand = !chart.lefthand;
         (document.querySelector(lefthandId) as HTMLInputElement)!.checked = chart.lefthand;
     })
+
+    const resize = () => {
+        const controls = document.querySelector('form');
+        const controlsTop = controls!.offsetTop;
+        const controlsBottom = controlsTop + controls!.offsetHeight;
+        const heightAvailable = Math.max(window.innerHeight - controlsBottom - 15, 0);
+        const svg = document.querySelector('#chart svg') as HTMLElement;
+        svg!.setAttribute('height', (0.95 * heightAvailable).toString());
+    }
+
+    window.onresize = resize;
+    resize();
+
 };

@@ -10,16 +10,17 @@
         <!-- https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms -->
         <!-- https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ -->
         <form>
-            <label for="track">Inbound track</label>
-            <input type="text" id="track" name="track" size="3" value="0" />
-            <label for="lh">LH</label>
-            <input type="checkbox" class="switch" id="lh" name="lh" />            
-            <label for="hdg">Hdg</label>
-            <input type="text" id="hdg" name="hdg" size="3" value="0" />
-            <label for="dark">Dark theme</label>
-            <input type="checkbox" class="switch" id="dark" name="dark" checked />
+            <div class="controls">
+                <label for="track">Inbound track</label>
+                <input type="text" id="track" name="track" size="3" value="0" />
+                <label for="lh">LH</label>
+                <input type="checkbox" class="switch" id="lh" name="lh" />
+                <label for="hdg">Hdg</label>
+                <input type="text" id="hdg" name="hdg" size="3" value="0" />
+                <label for="dark">Dark theme</label>
+                <input type="checkbox" class="switch" id="dark" name="dark" checked />
+            </div>
         </form>
-        <br />
         <div id="chart" class="chart" v-on:click="chartClicked" />
         <script src="./dist/bundle.js"></script>       
     </body>

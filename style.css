@@ -2,7 +2,6 @@
     --background-color: black;
     --text-color: white;
     --entry-path-color: white;
-    --test-color: rgb(6, 69, 206);
 }
 
 body {
@@ -11,6 +10,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     overflow: hidden;
+    font-size: large;
 }
 
 div.controls {
@@ -25,9 +25,41 @@ div.controls {
     margin-top: 15px;
 }
 
+#chart svg {
+    width: 90%;
+}
+
 @media screen and (max-width: 600px) {
     div.controls {
         grid-template-columns: repeat(4, max-content);
+    }
+}
+
+@media screen and (min-aspect-ratio: 16/11) {
+    body {
+        text-align: start;
+    }
+
+    div.controls {
+        display: block;
+        float: left;
+        grid-template-columns: none;
+    }
+
+    label, input {
+        display: block;
+    }
+
+    input {
+        margin-bottom: 1em !important;
+    }
+
+    #chart {
+        text-align: center;
+    }
+
+    #chart svg {
+        width: auto;
     }
 }
 
@@ -69,6 +101,42 @@ div.controls {
 
 .entry-arrow {
     fill: var(--entry-path-color);
+}
+
+.timer-button {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 0px;
+    right: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-image: url('timer.svg');
+}
+
+#timer {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: .7;
+    z-index: 1000;
+    text-align: center;
+}
+
+#timer .lcd {
+    background: #666666;
+    padding: 0.5em;
+    font-size: 2em;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#timer button {
+    font-size: 2em;
+    margin-top: 5px;
+    opacity: 0.9;
 }
 
 #entry-group path,line {

@@ -1,13 +1,18 @@
 import Hammer from 'hammerjs';
 import { Controls } from './modules/controls';
 import { Chart } from './modules/chart';
+import { Timer } from './modules/timer';
 
-// HTML element IDs
+// HTML element selectors
 const chartId = '#chart';
 const trackId = '#track';
 const headingId = '#hdg';
 const lefthandId = '#lh';
 const darkId = '#dark';
+const svgSelector = `${chartId} svg`;
+const timerButtonSelector = '.timer-button';
+const timerId = '#timer';
+const timerLCDSelector = '#timer .lcd';
 
 window.onload = () => {    
     const chart = new Chart(chartId, 400, 400);
@@ -37,7 +42,7 @@ window.onload = () => {
         chart.heading = newHeading;
     });
 
-    const mc = new Hammer(document.querySelector(chartId) as HTMLElement);
+    const mc = new Hammer(document.querySelector(svgSelector) as HTMLElement);
     mc.get('rotate').set({ enable: true });
     mc.on('rotatestart', evt => {
         chart.rotationStarted(evt.rotation);
@@ -50,6 +55,8 @@ window.onload = () => {
         chart.lefthand = !chart.lefthand;
         (document.querySelector(lefthandId) as HTMLInputElement)!.checked = chart.lefthand;
     })
+
+    const timer = new Timer(timerButtonSelector, timerId, timerLCDSelector);
 
     const resize = () => {
         const controls = document.querySelector('form');

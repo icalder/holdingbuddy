@@ -7,8 +7,6 @@
         <link rel="stylesheet" type="text/css" href="./formelements.css" />
     </head>
     <body>
-        <!-- https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms -->
-        <!-- https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ -->
         <form>
             <div class="controls">
                 <label for="track">Inbound track</label>
@@ -21,7 +19,14 @@
                 <input type="checkbox" class="switch" id="dark" name="dark" checked />
             </div>
         </form>
-        <div id="chart" class="chart" v-on:click="chartClicked" />
+        <div id="chart" class="chart"></div>
+        <div class="timer-button"></div>
+        <div id="timer">
+            <div class="lcd">00:00</div>
+            <button class="start" type="button">Start</button>
+            <button class="stop" type="button">Stop</button>
+            <button class="reset" type="button">Reset</button>
+        </div>
         <script src="./dist/bundle.js"></script>       
     </body>
 </html>

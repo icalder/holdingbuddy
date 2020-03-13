@@ -26,7 +26,7 @@ export class Chart {
     
     constructor (chartSelector: string,
         private width: number, private height: number) {
-            this.svg = SVG.SVG().size('90%', '90%').addTo(chartSelector);
+            this.svg = SVG.SVG().addTo(chartSelector);
             this.svg.viewbox(0, 0, width, height);
             this.defs = new Defs(this.svg);
     }
@@ -40,13 +40,13 @@ export class Chart {
     }
 
     public set inboundTrack(value: number) {
-        this._inboundTrack = value % 360;
+        this._inboundTrack = Math.abs(value % 360);
         this._inboundTrackChangedHandler?.(this._inboundTrack);     
         this.draw();
     }
 
     public set heading(value: number) {
-        this._heading = value % 360;
+        this._heading = Math.abs(value % 360);
         this._headingChangedHandler?.(this._heading);     
         this.draw();
     }
@@ -212,7 +212,7 @@ export class Chart {
                 txt.tspan(trackDeg.toString() + '°')
                     .attr('text-anchor', 'start');
             }).y(8);
-            this.lefthand ? group.use(this.defs.lhArrow).y(25) : group.use(this.defs.rhArrow).y(25);          
+            this.lefthand ? group.use(this.defs.lhArrow).y(25) : group.use(this.defs.rhArrow).y(25);
         }
         textAboveArrow.refPos = new Coord((this.lefthand ? 16 : 0), 30);
 
@@ -222,7 +222,7 @@ export class Chart {
                 txt.tspan(trackDeg.toString() + '°')
                     .attr('text-anchor', 'start');
             }).y(10);
-            this.lefthand ? group.use(this.defs.rhArrow) : group.use(this.defs.lhArrow);           
+            this.lefthand ? group.use(this.defs.rhArrow) : group.use(this.defs.lhArrow);
         }
         textBelowArrow.refPos = new Coord((this.lefthand ? 0 : 16), 5);
         
@@ -232,13 +232,13 @@ export class Chart {
 
         let inboundHeading = this.holdGroup.marker(40, 40, add => {
             inboundMarkerFactory(add, this.inboundTrackDeg)
-        }).ref(...inboundMarkerFactory.refPos.asArray).attr({ orient: this.inboundTrackDeg > 180 ? '90' : 'auto' })
-        inboundLeg.marker('start', inboundHeading)
+        }).ref(...inboundMarkerFactory.refPos.asArray).attr({ orient: this.inboundTrackDeg > 180 ? '90' : 'auto' });
+        inboundLeg.marker('start', inboundHeading);
 
         let outboundHeading = this.holdGroup.marker(40, 40, add => {
             outboundMarkerFactory(add, this.outboundTrackDeg)
-        }).ref(...outboundMarkerFactory.refPos.asArray).attr({ orient: this.inboundTrackDeg > 180 ? 'auto' : '270' })
-        outboundLeg.marker('start', outboundHeading)
+        }).ref(...outboundMarkerFactory.refPos.asArray).attr({ orient: this.inboundTrackDeg > 180 ? 'auto' : '270' });
+        outboundLeg.marker('start', outboundHeading);
 
         this.holdGroup.rotate(this.inboundTrackDeg, cx, cy);
     }    

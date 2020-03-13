@@ -42,7 +42,7 @@ export class Controls {
                 // Light theme
                 document.body.style.setProperty('--background-color', '#ddd');
                 document.body.style.setProperty('--text-color', 'black');
-                document.body.style.setProperty('--entry-path-color', '#999');
+                document.body.style.setProperty('--entry-path-color', '#777');
             }
         });
     }

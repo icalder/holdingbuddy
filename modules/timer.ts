@@ -1,6 +1,7 @@
 export class Timer {
     private readonly overlay: HTMLElement;
     private readonly lcd: HTMLElement;
+    private readonly startBtn: HTMLInputElement;
     private overlayVisible: boolean = false;
     private minutes = 0;
     private seconds = 0;
@@ -9,8 +10,9 @@ export class Timer {
     constructor(timerButtonSelector: string, overlaySelector: string, lcdSelector: string) {
         this.overlay = document.querySelector(overlaySelector) as HTMLElement;
         this.lcd = document.querySelector(lcdSelector) as HTMLElement;
+        this.startBtn = document.querySelector(`${overlaySelector} .start`) as HTMLInputElement;
 
-        document.querySelector(`${overlaySelector} .start`)?.addEventListener('click', (evt: Event) => {
+        this.startBtn?.addEventListener('click', (evt: Event) => {
             this.startTimer();
         });
 
@@ -38,6 +40,7 @@ export class Timer {
     }
 
     private startTimer() {
+        this.startBtn.disabled = true;
         if (!this.intervalTimer) {
             this.intervalTimer = window.setInterval(() => this.incrementTime(), 1000);
         }
@@ -48,6 +51,7 @@ export class Timer {
             window.clearInterval(this.intervalTimer);
         }
         this.intervalTimer = undefined;
+        this.startBtn.disabled = false;
     }
 
     private pad(n: number, leadingZeros: number = 2) {

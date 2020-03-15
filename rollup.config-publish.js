@@ -6,7 +6,11 @@ import config from './rollup.config.js';
 config.plugins.push(
   copy({
     targets: [
-      { src: 'dist/bundle.js', dest: `${publishDest}/dist` },
+      {
+        src: 'dist/bundle.js', 
+        dest: `${publishDest}/dist`,
+        hook: 'writeBundle'
+      },
       {
         src: 'index.html',
         dest: publishDest,
@@ -15,7 +19,18 @@ config.plugins.push(
             .replace(/\/static\//g, '/holdingbuddy/static/')
             .replace('/dist/', '/holdingbuddy/dist/')
       },
-      { src: 'static/**/*', dest: `${publishDest}/static`}
+      {
+        src: 'static/*.css',
+        dest: `${publishDest}/static`,
+        transform: contents =>
+          contents.toString()
+            .replace(/\/static\//g, '/holdingbuddy/static/')
+      },
+      {
+        src: ['static/*', '!static/*.css'],
+        dest: `${publishDest}/static`,
+        flatten: false
+      }
     ]
   })
 );

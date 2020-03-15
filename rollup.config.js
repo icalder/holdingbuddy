@@ -1,7 +1,8 @@
 import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-//import { uglify } from '@rollup/plugin-uglify';
+
+// https://www.npmjs.com/package/rollup-plugin-copy
 
 export default {
   input: 'index.ts',
@@ -14,6 +15,5 @@ export default {
     typescript(),     
     resolve({ browser: true, preferBuiltins: true }),
     commonjs()
-    //uglify()
   ]
 }

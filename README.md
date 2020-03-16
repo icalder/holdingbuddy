@@ -1,6 +1,9 @@
 # holdingbuddy
 
 ## A PWA/webapp to help with holding pattern entry procedures
+https://icalder.github.io/holdingbuddy/
+
+PWA is coming soon!
 
 ## Touch-screen features
  - *Rotate* to set holding pattern inbound track

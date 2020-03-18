@@ -14,14 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "@svgdotjs/svg.js": "^3.0.16",
-    "@types/hammerjs": "^2.0.36",
-    "@types/uuid": "^3.4.8",
     "hammerjs": "^2.0.8"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@rollup/plugin-typescript": "^3.1.1",
+    "@types/hammerjs": "^2.0.36",
     "concurrently": "^5.1.0",
     "lite-server": "^2.5.4",
     "rollup": "^1.32.1",

@@ -13,8 +13,19 @@ const svgSelector = `${chartId} svg`;
 const timerButtonSelector = '.timer-button';
 const timerId = '#timer';
 const timerLCDSelector = '#timer .lcd';
+const updateId = '#update-available';
 
-window.onload = () => {    
+var newWorker: ServiceWorker | null;
+
+window.onload = () => {
+    document.querySelector(updateId + ' .update')?.addEventListener('click', (evt: Event) => {
+        reload();
+    });
+
+    document.querySelector(".close")?.addEventListener('click', (evt: Event) => {
+        (document.querySelector(updateId) as HTMLElement).style.visibility = 'hidden';
+    });
+
     const chart = new Chart(chartId, 400, 400);
     chart.inboundTrackChangedHandler = (track: number) => {
         (document.querySelector(trackId) as HTMLInputElement)!.value = track.toString();
@@ -59,10 +70,9 @@ window.onload = () => {
     const timer = new Timer(timerButtonSelector, timerId, timerLCDSelector);
 
     const resize = () => {
-        const controls = document.querySelector('form');
-        const controlsTop = controls!.offsetTop;
-        const controlsBottom = controlsTop + controls!.offsetHeight;
-        const heightAvailable = Math.max(window.innerHeight - controlsBottom - 15, 0);
+        const chart = document.querySelector(chartId) as HTMLElement;
+        const chartTop = chart!.offsetTop;
+        const heightAvailable = window.innerHeight - chartTop;
         const svg = document.querySelector('#chart svg') as HTMLElement;
         svg!.setAttribute('height', (0.95 * heightAvailable).toString());
     }
@@ -70,4 +80,49 @@ window.onload = () => {
     window.onresize = resize;
     resize();
 
+    registerSW();
+
 };
+
+function showUpdateAvailable() {
+    (document.querySelector(updateId) as HTMLElement).style.visibility = 'visible';
+}
+
+function reload() {
+    if (newWorker) {
+        newWorker.postMessage({ action: 'skipWaiting' });
+    }
+    (document.querySelector(updateId) as HTMLElement).style.visibility = 'hidden';
+}
+
+async function registerSW() {
+    if ('serviceWorker' in navigator) {
+        try {
+            const reg = await navigator.serviceWorker.register('./sw.js');
+            reg.addEventListener('updatefound', () => {
+                newWorker = reg.installing;
+                if (newWorker) {
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker!.state == 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                // We are a client
+                                showUpdateAvailable();
+                            }
+                        }
+                    });
+                }
+            });
+        } catch (e) {
+            console.log(`SW registration failed: ${e}`);
+        }
+
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (!refreshing) {
+                console.log("Reload!!");
+                window.location.reload();
+                refreshing = true;
+            }
+        });
+    }
+}

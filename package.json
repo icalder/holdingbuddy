@@ -6,6 +6,7 @@
   "scripts": {
     "rollup": "npx rollup -c --name 'holdingbuddy' -w",
     "serve": "lite-server",
+    "serve-static": "python -m http.server 3000",
     "dev": "concurrently \"tsc -w\" \"lite-server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish": "npx rollup -c rollup.config-publish.js --name 'holdingbuddy'"

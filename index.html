@@ -3,7 +3,9 @@
     <head>
         <title>Holding Buddy</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="/manifest.json" />
 
         <!-- https://realfavicongenerator.net -->
         <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
@@ -18,6 +20,9 @@
         <link rel="stylesheet" type="text/css" href="/static/formelements.css" />
     </head>
     <body>
+        <div id="update-available">
+            <p>A newer version is available. <a class="update" id="reload">UPDATE</a> <span class="close"><a>X</a></span></p>
+        </div>
         <form>
             <div class="controls">
                 <label for="track">Inbound track</label>

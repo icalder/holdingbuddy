@@ -21,6 +21,40 @@ div.controls {
     align-items: center;
 }
 
+#update-available {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background-color: #333;
+    opacity: .9;
+    z-index: 1000;
+    text-align: center;
+}
+
+#update-available p {
+    margin: 0px 0px 5px 0px;
+    padding: 0.5em;
+}
+
+#update-available a {
+    text-decoration: none;
+}
+
+#update-available a:hover {
+    cursor: pointer;
+}
+
+a.update {
+    color: aqua;
+}
+
+span.close {
+    float: right;
+}
+
 #chart {
     margin-top: 15px;
     position: relative;
@@ -41,9 +75,14 @@ div.controls {
         text-align: start;
     }
 
+    form {
+        display: inline-block;
+        width: 20%;
+        vertical-align: top;
+    }
+
     div.controls {
         display: block;
-        float: left;
         grid-template-columns: none;
     }
 
@@ -56,6 +95,8 @@ div.controls {
     }
 
     #chart {
+        display: inline-block;
+        width: 75%;
         text-align: center;
     }
 
@@ -111,8 +152,8 @@ div.controls {
     height: 60px;
     bottom: 0px;
     right: 0px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 0px;
+    margin-bottom: 0px;
     background-image: url('/static/timer.svg');
 }
 

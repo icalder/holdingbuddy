@@ -77,7 +77,7 @@ export class Controls {
 
     set compassDir(dir: number | null) {
         if (this.useCompass && dir != null) {
-            const heading = dir;
+            const heading = Math.round(dir);
             this.headingChangedHandlers
                 .forEach(h => h(this.heading, heading));
             this.heading = heading;

@@ -12,22 +12,11 @@ config.plugins.push(
         hook: 'writeBundle'
       },
       {
-        src: 'index.html',
-        dest: publishDest,
-        transform: contents =>
-          contents.toString()
-            .replace(/\/static\//g, '/holdingbuddy/static/')
-            .replace('/dist/', '/holdingbuddy/dist/')
-      },
+        src: ['index.html', 'manifest.json', 'sw.js'],
+        dest: publishDest
+      },      
       {
-        src: 'static/*.css',
-        dest: `${publishDest}/static`,
-        transform: contents =>
-          contents.toString()
-            .replace(/\/static\//g, '/holdingbuddy/static/')
-      },
-      {
-        src: ['static/*', '!static/*.css'],
+        src: 'static/*',
         dest: `${publishDest}/static`,
         flatten: false
       }

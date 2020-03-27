@@ -1,14 +1,14 @@
-const version = '0.1.0';
+const version = '0.1.1';
 const cacheName = 'holdingBuddy';
 const staticAssets = [
-    './',
-    './index.html',
-    './manifest.json',
-    './static/formelements.css',
-    './static/style.css',
-    './static/timer.svg',
-    './static/icons/android-chrome-192x192.png',
-    './static/icons/android-chrome-512x512.png'
+    '/',
+    'index.html',
+    'manifest.json',
+    'static/formelements.css',
+    'static/style.css',
+    'static/timer.svg',
+    'static/icons/android-chrome-192x192.png',
+    'static/icons/android-chrome-512x512.png'
 ];
 
 // https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle

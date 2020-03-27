@@ -9,6 +9,7 @@ const trackId = '#track';
 const headingId = '#hdg';
 const lefthandId = '#lh';
 const darkId = '#dark';
+const compassId = '#compass';
 const svgSelector = `${chartId} svg`;
 const timerButtonSelector = '.timer-button';
 const timerId = '#timer';
@@ -43,6 +44,8 @@ window.onload = () => {
     controls.lefthandCheckboxSelector = lefthandId;
     controls.headingInputSelector = headingId;
     controls.darkThemeCheckboxSelector = darkId;
+    controls.compassCheckboxSelector = compassId;
+
     controls.addTrackChangedHandler((_, newTrack) => {
         chart.inboundTrack = newTrack;
     });
@@ -66,6 +69,16 @@ window.onload = () => {
         chart.lefthand = !chart.lefthand;
         (document.querySelector(lefthandId) as HTMLInputElement)!.checked = chart.lefthand;
     })
+
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', eventData => {
+            if ('webkitCompassHeading' in eventData) {
+                controls.compassDir = eventData['webkitCompassHeading'];
+            } else {
+                controls.compassDir = eventData.alpha;
+            }
+        });
+    }
 
     const timer = new Timer(timerButtonSelector, timerId, timerLCDSelector);
 
@@ -98,7 +111,7 @@ function reload() {
 async function registerSW() {
     if ('serviceWorker' in navigator) {
         try {
-            const reg = await navigator.serviceWorker.register('./sw.js');
+            const reg = await navigator.serviceWorker.register('sw.js');
             reg.addEventListener('updatefound', () => {
                 newWorker = reg.installing;
                 if (newWorker) {

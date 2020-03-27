@@ -10,6 +10,8 @@ export class Controls {
     private heading: number = 0;
     private headingChangedHandlers: ValueChangedHandler<number>[] = [];
 
+    public useCompass = false;
+
     addTrackChangedHandler(handler: ValueChangedHandler<number>) {
         this.trackChangedHandlers.push(handler);
     }
@@ -47,6 +49,12 @@ export class Controls {
         });
     }
 
+    set compassCheckboxSelector(selector: string) {
+        document.querySelector(selector)?.addEventListener('change', (evt: Event) => {
+            this.useCompass = (evt.target as HTMLInputElement).checked;
+        });
+    }
+
     set trackInputSelector(selector: string) {
         document.querySelector(selector)?.addEventListener('change', (evt: Event) => {
             // TODO more validation
@@ -65,5 +73,14 @@ export class Controls {
                 .forEach(h => h(this.heading, heading));
             this.heading = heading;
         });
+    }
+
+    set compassDir(dir: number | null) {
+        if (this.useCompass && dir != null) {
+            const heading = dir;
+            this.headingChangedHandlers
+                .forEach(h => h(this.heading, heading));
+            this.heading = heading;
+        }
     }
 };

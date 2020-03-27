@@ -15,10 +15,11 @@ body {
 
 div.controls {
     display: inline-grid;
-    grid-template-columns: repeat(8, max-content);
+    grid-template-columns: repeat(10, max-content);
     column-gap: 0.5rem;
     row-gap: 0.5rem;
     align-items: center;
+    justify-items: end;
 }
 
 #update-available {
@@ -64,9 +65,9 @@ span.close {
     width: 90%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     div.controls {
-        grid-template-columns: repeat(4, max-content);
+        grid-template-columns: repeat(6, max-content);
     }
 }
 
@@ -154,7 +155,7 @@ span.close {
     right: 0px;
     margin-right: 0px;
     margin-bottom: 0px;
-    background-image: url('/static/timer.svg');
+    background-image: url('timer.svg');
 }
 
 #timer {

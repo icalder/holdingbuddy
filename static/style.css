@@ -232,6 +232,7 @@ span.close {
 #favourites {
     border-collapse: collapse;
     width: 100%;
+    border: 3px solid #555;
 }
 
 #favourites tbody>tr {

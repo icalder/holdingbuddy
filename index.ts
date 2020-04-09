@@ -110,7 +110,7 @@ window.onload = () => {
     window.onresize = resize;
     resize();
 
-    //registerSW();
+    registerSW();
 
 };
 

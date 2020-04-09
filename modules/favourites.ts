@@ -22,10 +22,6 @@ export class Hold {
     constructor(public fix: string, public inboundTrack: number, public lefthand: boolean = false) {
         this.id = slugify(fix);
     }
-
-    get direction() {
-        return this.lefthand ? "Left" : "Right";
-    }
 }
 
 export class Favourites {
@@ -34,7 +30,23 @@ export class Favourites {
     private favouritesRenderedCallback?: () => void;
 
     constructor(private tableSelector: string, private addHoldTemplate: string,
-        private addHoldHandler: (event: Event) => void) {        
+        private addHoldHandler: (event: Event) => void) {
+        this.load();       
+    }
+
+    private save() {
+        if (window.localStorage) {
+            window.localStorage.setItem('holds', JSON.stringify(this.holds));
+        }
+    }
+
+    private load() {
+        if (window.localStorage) {
+            const savedHolds = window.localStorage.getItem('holds');
+            if (savedHolds) {
+                this.holds = JSON.parse(savedHolds);
+            }
+        }
     }
 
     public addFavouriteSelectedHandler(handler: FavouriteSelectedHandler) {
@@ -48,12 +60,14 @@ export class Favourites {
     public add(hold: Hold) {
         if (!this.holds.find(h => h.id == hold.id)) {
             this.holds.push(hold);
+            this.save();
             this.render();
         }
     }
 
     public delete(id: string) {
         this.holds = this.holds.filter(h => h.id != id);
+        this.save();
         this.render();
     }
 
@@ -65,10 +79,11 @@ export class Favourites {
         for (let hold of this.holds) {
             const rowId = 'hold-' + hold.id;
             const deleteId = 'delete-' + hold.id;
+            const direction = hold.lefthand ? "Left" : "Right";
             tbody.innerHTML += `<tr id="${rowId}">
                 <td>${hold.fix}</td>
                 <td>${hold.inboundTrack}</td>
-                <td>${hold.direction}</td>
+                <td>${direction}</td>
                 <td id="${deleteId}" class="delete">X</td>
             </tr>`;           
         }

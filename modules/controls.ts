@@ -1,3 +1,5 @@
+import { lightTheme, darkTheme } from './themes';
+
 type ValueChangedHandler<T> = (old: T, cur: T) => void;
 
 export class Controls {
@@ -11,6 +13,7 @@ export class Controls {
     private headingChangedHandlers: ValueChangedHandler<number>[] = [];
 
     public useCompass = false;
+    public menuVisible = false;
 
     addTrackChangedHandler(handler: ValueChangedHandler<number>) {
         this.trackChangedHandlers.push(handler);
@@ -35,16 +38,9 @@ export class Controls {
     
     set darkThemeCheckboxSelector(selector: string) {
         document.querySelector(selector)?.addEventListener('change', (evt: Event) => {
-            if ((evt.target as HTMLInputElement).checked) {
-                // Dark theme
-                document.body.style.setProperty('--background-color', 'black');
-                document.body.style.setProperty('--text-color', 'white');
-                document.body.style.setProperty('--entry-path-color', 'white');
-            } else {
-                // Light theme
-                document.body.style.setProperty('--background-color', '#ddd');
-                document.body.style.setProperty('--text-color', 'black');
-                document.body.style.setProperty('--entry-path-color', '#777');
+            const theme = ((evt.target as HTMLInputElement).checked) ? darkTheme : lightTheme;
+            for (let [k,v] of Object.entries(theme)) {
+                document.body.style.setProperty(k, v);
             }
         });
     }

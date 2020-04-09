@@ -2,6 +2,7 @@ import Hammer from 'hammerjs';
 import { Controls } from './modules/controls';
 import { Chart } from './modules/chart';
 import { Timer } from './modules/timer';
+import { Menu, MenuProps } from './modules/menu';
 
 // HTML element selectors
 const chartId = '#chart';
@@ -15,6 +16,14 @@ const timerButtonSelector = '.timer-button';
 const timerId = '#timer';
 const timerLCDSelector = '#timer .lcd';
 const updateId = '#update-available';
+const fixNameSelector = '#fix-name p';
+
+const addHoldTemplate = `<tr class="addfix">
+    <td><input type="text" id="favFix" name="favFix" size="12" /></td>
+    <td><input type="text" id="favTrack" name="favTrack" size="3" value="0" /></td>
+    <td><label>LH <input type="checkbox" class="switch" id="favLH" name="favLH" /></label></td>
+    <td class="add">+</td>
+    </tr>`;
 
 var newWorker: ServiceWorker | null;
 
@@ -37,6 +46,14 @@ window.onload = () => {
     chart.draw();
     document.querySelector(chartId)?.addEventListener('click', (evt: Event) => {
         chart.chartClicked(evt as MouseEvent);
+    });
+
+    const menu = new Menu(new MenuProps(), addHoldTemplate);
+    menu.addFavouriteSelectedHandler(hold => {
+        chart.inboundTrack = hold.inboundTrack;
+        chart.lefthand = hold.lefthand;
+        chart.fixName = hold.fix;
+        menu.hide();
     });
 
     const controls = new Controls();    
@@ -93,7 +110,7 @@ window.onload = () => {
     window.onresize = resize;
     resize();
 
-    registerSW();
+    //registerSW();
 
 };
 

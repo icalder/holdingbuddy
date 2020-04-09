@@ -40,12 +40,35 @@
         <div id="chart" class="chart">
             <div class="timer-button"></div>
         </div>
+        <div id="menu">
+            <div class="menu-content">
+                <table id="favourites">
+                    <thead>
+                        <tr>
+                            <th>Fix</th>
+                            <th>Track</th>
+                            <th>Direction</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <a class="menu-icon">&#9776</a>
+        </div>
         <div id="timer">
             <div class="lcd">00:00</div>
             <button class="start" type="button">Start</button>
             <button class="stop" type="button">Stop</button>
             <button class="reset" type="button">Reset</button>
         </div>
+        <div id="fix-name">
+            <p></p>
+        </div>
+
+        <!-- TODO open-up menu bar for favourite holds
+        https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/offline-for-pwa -->
         <script src="dist/bundle.js"></script>
     </body>
 </html>

@@ -14,11 +14,13 @@ export class Chart {
     private backgroundGroup?: SVG.G;
     private holdGroup?: SVG.G;
     private entryGroup?: SVG.G;
+    private fixNameText?: SVG.Text;
     private _lefthand = false;
     private _inboundTrack = 0;
     private _inboundTrackChangedHandler?: (val: number) => void;
     private _heading = 0;
     private _headingChangedHandler?: (val: number) => void;
+    private _fixName = '';
 
     // reqd for Hammer
     private lastInboundTrack = 0;
@@ -41,7 +43,8 @@ export class Chart {
 
     public set inboundTrack(value: number) {
         this._inboundTrack = Math.abs(value % 360);
-        this._inboundTrackChangedHandler?.(this._inboundTrack);     
+        this._inboundTrackChangedHandler?.(this._inboundTrack);
+        this.fixName = '';
         this.draw();
     }
 
@@ -53,11 +56,17 @@ export class Chart {
 
     public set lefthand(value: boolean) {
         this._lefthand = value;
+        this.fixName = '';
         this.draw();
     }
 
     public get lefthand() {
         return this._lefthand;
+    }
+
+    public set fixName(value: string) {
+        this._fixName = value;
+        this.draw();
     }
 
     public rotationStarted(rotation: number) {
@@ -159,6 +168,10 @@ export class Chart {
         if (this.holdGroup) {
             this.holdGroup.remove();
         }
+        if (this.fixNameText) {
+            this.fixNameText.remove();
+        }
+
         this.holdGroup = this.svg.group().id('racetrack-group');
 
         const [cx, cy] = this.fix.asArray;
@@ -184,10 +197,9 @@ export class Chart {
         }
         
         const inboundLeg = this.holdGroup.path(`M ${cx} ${cy + this.legLength} v -${this.legLength}`);
-          
         inboundLeg.marker('end', 10, 10, add => {
-            add.use(this.defs.fix).x(2.5).y(2.5)            
-        })
+            add.use(this.defs.fix).x(2.5).y(2.5);
+        });
 
         /*
         SVG text explained:
@@ -241,6 +253,16 @@ export class Chart {
         outboundLeg.marker('start', outboundHeading);
 
         this.holdGroup.rotate(this.inboundTrackDeg, cx, cy);
+
+        // If we have a fix name let's draw it
+        if (this._fixName) {
+            const ypos = (this._inboundTrack >= 0 && this._inboundTrack <= 80) ||
+                (this._inboundTrack >= 180 && this._inboundTrack <= 260) ? cy + 5 : cy - 20;
+            this.fixNameText = this.svg.text(txt =>
+                txt.tspan(this._fixName)
+                    .addClass('fixName')
+            ).x(cx + 5).y(ypos);
+        }
     }    
 
     protected calculatePlanePosition(): Coord {               

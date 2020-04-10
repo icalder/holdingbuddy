@@ -179,13 +179,12 @@ span.close {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: .7;
     z-index: 1000;
     text-align: center;
 }
 
 #timer .lcd {
-    background: #666666;
+    background:rgba(102, 102, 102, 0.7);
     padding: 0.5em;
     font-size: 2em;
     border: 2px solid black;
@@ -195,7 +194,7 @@ span.close {
 #timer button {
     font-size: 2em;
     margin-top: 5px;
-    opacity: 1.0;
+    opacity: 0.7;
 }
 
 #entry-group path,line {

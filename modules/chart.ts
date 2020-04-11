@@ -374,10 +374,12 @@ export class Chart {
                 this.entryGroup.path(`M ${cx} ${cy + this.legLength} A ${this.turnRadius} ${this.turnRadius} 0 0 ${this.lefthand ? 1 : 0} ${xr} ${cy + this.legLength}`)
                     .fill({ opacity: 0 })
                     .rotate(this.inboundTrackDeg, cx, cy) ;
-                // At completion of outbound turn in reverse, head directly to the fix
-                // Find the point of return at the start of the 'outbound' turn 
+                // At completion of outbound turn in reverse, turn again back to the course to the fix
+                // We'll just draw a line to a point 1/3 away from the fix i.e. cy + 0.33*leglength
+                const yintercept = cy + 0.33 * this.legLength;
+                // Find the point of return at the start of the 'outbound' turn
                 const yr = cy + this.legLength;
-                const returnLine = this.entryGroup.line(xr, yr, cx, cy)
+                const returnLine = this.entryGroup.line(xr, yr, cx, yintercept)
                     .rotate(this.inboundTrackDeg, cx, cy);
                 returnLine.marker('end', endArrow)
                 break;

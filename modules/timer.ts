@@ -35,7 +35,8 @@ export class Timer {
                 this.hideOverlay();
             } else {
                 this.showOverlay();
-            }            
+            }
+            evt.stopPropagation();
         });
     }
 

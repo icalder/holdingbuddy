@@ -16,7 +16,6 @@ const timerButtonSelector = '.timer-button';
 const timerId = '#timer';
 const timerLCDSelector = '#timer .lcd';
 const updateId = '#update-available';
-const fixNameSelector = '#fix-name p';
 
 const addHoldTemplate = `<tr class="addfix">
     <td><input type="text" id="favFix" name="favFix" size="12" /></td>

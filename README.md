@@ -8,6 +8,16 @@ https://icalder.github.io/holdingbuddy/
  - *Swipe* left/right to change hold orientation
  - *Touch* to position aircraft
 
+## Development
+Run these commands, then browse to http://localhost:3000
+```
+npm install
+# In one terminal
+npm run rollup
+# In another terminal
+npm run serve
+```
+
 ## Credits
 Thanks go to these excellent libraries:
  - [SVG.js](https://svgjs.com/docs/3.0/)

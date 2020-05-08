@@ -19,7 +19,7 @@ const updateId = '#update-available';
 
 const addHoldTemplate = `<tr class="addfix">
     <td><input type="text" id="favFix" name="favFix" size="12" /></td>
-    <td><input type="text" id="favTrack" name="favTrack" size="3" value="0" /></td>
+    <td><input type="number" id="favTrack" name="favTrack" min="0" max="360" value="0" /></td>
     <td><label>LH <input type="checkbox" class="switch" id="favLH" name="favLH" /></label></td>
     <td class="add">+</td>
     </tr>`;

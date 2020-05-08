@@ -108,10 +108,13 @@
     }   
   }
   
-  input[type='text'] {
+  input[type='text'],[type='number'] {
     border-radius: 11px;
     padding: 3px;
   }
   
+  input[type='number'] {
+    width: 3em;
+  }
 
   

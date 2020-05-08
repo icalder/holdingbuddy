@@ -1,4 +1,4 @@
-const version = '0.3.1';
+const version = '0.3.2';
 const cacheName = 'holdingBuddy';
 const staticAssets = [
     '/',

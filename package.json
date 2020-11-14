@@ -23,7 +23,7 @@
     "@rollup/plugin-typescript": "^3.1.1",
     "@types/hammerjs": "^2.0.36",
     "concurrently": "^5.1.0",
-    "lite-server": "^2.5.4",
+    "lite-server": "^2.6.1",
     "rollup": "^1.32.1",
     "rollup-plugin-copy": "^3.3.0",
     "typescript": "^3.8.3"

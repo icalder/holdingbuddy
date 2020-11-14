@@ -7,7 +7,7 @@ export class Defs {
     public rhEntryArrow: SVG.Path;
     public lhEntryArrow: SVG.Path;
     public stopwatch: SVG.G;
-    public plane: SVG.G;
+    public plane: SVG.Container;
 
     constructor(svg: SVG.Svg) {        
         this.fix = svg.defs().circle(5).fill('white').stroke('black');
@@ -25,15 +25,17 @@ export class Defs {
         return stopwatch;
     }
 
-    protected definePlane(svg: SVG.Svg): SVG.G {
-        const plane = svg.defs().group();
+    protected definePlane(svg: SVG.Svg): SVG.Container {
+        const plane = svg.defs().nested();
         plane.polygon('16,8 24,8 20,0');
         plane.rect(8, 30).radius(5).x(16).y(5).fill('black');
         plane.polygon('0,25, 40,25, 20,15');
         plane.polygon('12,38, 28,38, 20,28');
         plane.polygon('18,38, 22,38, 20,42');
+        plane.width(40);
+        plane.height(42);
         // Position the plane centered at (0,0) so when we USE it at (x,y) there's no offset to add       
-        plane.center(0, 0);        
+        plane.center(0, 0);
         return plane;
     }
 }

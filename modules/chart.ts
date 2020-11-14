@@ -407,7 +407,7 @@ export class Chart {
     }
 
     protected drawPlane(planePosition: Coord) {        
-        let plane = this.entryGroup!.use(this.defs.plane);
+        const plane = this.entryGroup!.use(this.defs.plane);
         plane.center(...planePosition.asArray);
         plane.rotate(this._heading, ...planePosition.asArray);
     }

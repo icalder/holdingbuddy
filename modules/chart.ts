@@ -222,6 +222,7 @@ export class Chart {
             const group = marker.group();
             group.text(txt => {
                 txt.tspan(trackDeg.toString() + '°')
+                    .attr('dominant-baseline', 'text-before-edge')
                     .attr('text-anchor', 'start');
             }).y(8);
             this.lefthand ? group.use(this.defs.lhArrow).y(25) : group.use(this.defs.rhArrow).y(25);
@@ -232,6 +233,7 @@ export class Chart {
             const group = marker.group();                   
             group.text(txt => {
                 txt.tspan(trackDeg.toString() + '°')
+                    .attr('dominant-baseline', 'text-before-edge')
                     .attr('text-anchor', 'start');
             }).y(10);
             this.lefthand ? group.use(this.defs.rhArrow) : group.use(this.defs.lhArrow);
